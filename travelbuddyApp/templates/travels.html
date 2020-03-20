@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Travel Buddy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header class="container-fluid"> 
+        <h5 class="text-right"><a href="/logout"> Logout </a></h5>
+    </header>
+    <div class="container">
+
+        <h1 class="mt-5 mb-5">Hello, {{user.name}}!<hr></h1>
+        
+        <h5>Your Trip Scheadule</h5>
+            <table class="table table-striped mb-5">
+                <thead>
+                <tr>
+                    <th scope="col"> Destination</th>
+                    <th scope="col">Travel Start Date</th>
+                    <th scope="col">Travel End Date</th>
+                    <th scope="col">Plan</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for x in user.trips.all %}
+                <tr>
+                    <th scope="row"><a href="/travels/destination/{{x.id}}">{{x.destination}}</a></th>
+                    <td>{{x.startdate.date}}</td>
+                    <td>{{x.enddate.date}}</td>
+                    <td>{{x.description}}</td>
+                </tr>
+                {%endfor%}
+                </tbody>
+            </table>
+        
+        <br><br>
+        
+        <h5 class="mt-5 ">Other Available Travel Plans</h5>
+            <table class="table table-striped mb-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Travel Start Date</th>
+                        <th scope="col">Travel End Date</th>
+                        <th scope="col">Join</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for y in alltrips%}
+                    {% if y not in usertrips%}
+                    <tr>
+                        <td>{{y.creator.name}}</td>
+                        <th scope="row"><a href="/travels/destination/{{y.id}}">{{y.destination}}</a> </th>
+                        <td>{{y.startdate.date}}</td>
+                        <td>{{y.enddate.date}}</td>
+                        <td><a href="/travels/destination/{{y.id}}/join">Join</a></td>
+                    </tr>
+                    {%endif%}
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+        <h5 class="text-right"><a href="/travels/add">Add Travel Plan</a></h5>
+
+    </div>
+</body>
+</html>

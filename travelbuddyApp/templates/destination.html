@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Travel Buddy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    
+    <header class="container-fluid pt-4 "> 
+        <h5 class="text-right mr-4"><a href="/travels"> Home </a> | <a href="/logout"> Logout </a></h5>
+    </header>
+
+    <div class="container pb-5 pt-5">
+        <div class="mt-5 mb-5">
+
+            <h1 >{{trip.destination}}</h1>
+            <h5>Planned by: <span class="text-muted">{{trip.creator.name}}</span></h5>
+            <h5>Description: <span class="text-muted">{{trip.description}}</span></h5>
+            <h5>Travel Start Date: <span class="text-muted">{{trip.startdate.date}}</span></h5>
+            <h5>Travel End Date: <span class="text-muted">{{trip.enddate.date}}</span></h5>
+
+        </div>
+        <br><br>
+        <div class="mt-5 mb-5">
+
+            <h2>Other Users In The Trip</h2>
+            {%for x in trip.user.all%}
+            {% if x != user %}
+            <h5> {{x.name}}</h5>
+            {%endif%}
+            {% endfor %}
+            
+
+        </div>
+    
+    </div> 
+
+</body>
+</html>

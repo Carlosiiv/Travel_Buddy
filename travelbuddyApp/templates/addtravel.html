@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Travel Buddy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <header class="container-fluid"> 
+        <h5 class="text-right"><a href="/travels"> Home </a> | <a href="/logout"> Logout </a></h5>
+    </header>
+
+    <div class="container">
+
+        <h1 class="mt-5 mb-4">Add a Trip</h1>
+
+        
+
+        {% if messages %}
+        <hr>
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        <hr>
+        {% endif %}
+
+        
+
+        <form action="/travels/add/addtravel" method="POST" >
+            {% csrf_token %}
+            <div class="form-group mb-3 col-6 ">
+
+                <label for="destination">Destination</label>
+                <input type="text" name="destination" class="form-control" placeholder="Paris">
+
+                <hr>
+
+                <label for="startdate">Start Date</label>
+                <input type="date" class="form-control" name="startdate" >
+                
+                <hr>
+
+                <label for="enddate">End Date</label>
+                <input type="date" class="form-control" name="enddate" >
+
+                <hr>
+
+                <label for="description">Description / Itenerary</label> <br>
+                <textarea name="description" cols="30" class="form-control"></textarea> <br>
+
+                <button type="submit" value='Post' class="btn btn-info">Submit Travel</button>
+            </div>
+                
+        </form>
+
+
+    </div>
+</body>
+</html>
